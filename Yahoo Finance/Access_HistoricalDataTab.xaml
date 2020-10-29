@@ -1,0 +1,279 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="Access_HistoricalDataTab" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_StockSymbol" Type="InArgument(x:String)" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>662.666666666667,3189.33333333333</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>Access_HistoricalDataTab_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>System.Activities.DynamicUpdate</x:String>
+      <x:String>UiPath.Platform.ObjectLibrary</x:String>
+      <x:String>System.Reflection</x:String>
+      <x:String>System.Runtime.InteropServices</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Platform</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence sap2010:Annotation.AnnotationText="Searches the provided stock symbol and Access Historical Data tab for a stock symbol recived as an input parameter. Accepts stock symbols as parameter in_StockSymbol." DisplayName="Access HistoricalDataTab" sap:VirtualizedContainerService.HintSize="672.666666666667,3024.66666666667" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <Sequence DisplayName="Container for Access HistoricalDataTab Activities" sap:VirtualizedContainerService.HintSize="630.666666666667,2880" sap2010:WorkflowViewState.IdRef="Sequence_3">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <ui:BrowserScope Browser="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" UiBrowser="{x:Null}" BrowserType="Chrome" DisplayName="Attach_BrowserYahooFinance_Access_HistoricalDataTab" sap:VirtualizedContainerService.HintSize="588.666666666667,2787.33333333333" sap2010:WorkflowViewState.IdRef="BrowserScope_1" InformativeScreenshot="b5fe61b0f0fd1267979024879469a868" Selector="&lt;html app='chrome.exe' title='Yahoo Finance*' /&gt;">
+        <ui:BrowserScope.Body>
+          <ActivityAction x:TypeArguments="x:Object">
+            <ActivityAction.Argument>
+              <DelegateInArgument x:TypeArguments="x:Object" Name="ContextTarget" />
+            </ActivityAction.Argument>
+            <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="554.666666666667,2640.66666666667" sap2010:WorkflowViewState.IdRef="Sequence_2">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <ui:WaitImageAppear FoundElement="{x:Null}" sap2010:Annotation.AnnotationText="Wait untill Yahoo Finance pages loads completely. Yahoo logo on the top show that the pages has loaded completely." DisplayName="Find Image 'Yahoo Logo_Access_HistoricalDataTab'" sap:VirtualizedContainerService.HintSize="512.666666666667,178.666666666667" sap2010:WorkflowViewState.IdRef="WaitImageAppear_2">
+                <ui:WaitImageAppear.Image>
+                  <ui:ImageTarget Image="{x:Null}" Accuracy="0.8" InitialScalingFactor="1.5" Profile="Basic" TargetImageBase64="iVBORw0KGgoAAAANSUhEUgAAACMAAAAiCAYAAADVhWD8AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAFiUAABYlAUlSJPAAAAKFSURBVFhH7ZVLaBNBHMZ9IqKCojdBPHgRQTwJ4smzHkQ8KHiwvrUFi4JYUfHRQw+iqLWieLFaEIuKIChaRaWWoqCwSZomqaSRxAYbY4zJ5tHs/mVmH/lmd5NuC8GA+cEHu//5ZubbnZ3ZGVRH1F+Y3TOlfyakEQaFNMKgkP8nzOm1QYp6c4Ien40LHqSmYQbuJ/kkyMUNI4IHqVmY1uVDNFFU+SQGo59lmw+pWZhnHT/4BMitXd9sPqQmYQ4s8FAmWeITGCRjRdo71+5FKoYJDWS4weDdnZ82z5Nzcb1VY2Qwy+v3WmJ6pczDk2O2/kxIxTCd20e5wSCfVejwYq/ZvmeOxJ8W6doRoaZZEsVDeb2ikc8odGSJTxjfEFIxTNNsicbDBW4y6DkaM9utYZPRIg94datYZ/R1JoSxUUjVb6anVXzd3/05s23ozR+9qtHbpi3D8HtxeRVFpROrhs1+ViFVwxxa5CX5t/ghdmz6Sm2rA/qdRkFWqHmpj/bP9/AlQr29bf/WUEjVMEzPL4lb9GNvil5dG9fvNHBC9gD75nmEMaoJmTTMsRV+Kk2UDy92LafFt3VqTYBalvlIepEmVVW5hwV2Gs8qZNIwTIMPfnGzE56Xae7pv2s/+m/ujNjGsgpxFeb8+hA3O3F5c5h7or6cXinz9IL4U3QS4ioMU7Bf3CWMsUDebO+7kdCrGmy52jeKP0UnIa7DXN9mPz+6m6NmO/sFvO5KUCJSoMgXmR+A2L+SENdhrmwJ8w4G2VSJDi4sn8jTFeI6jPWQY1veyTdVIa7CnFkX5GYDpaTS8ZV+R+9UhbgK86Fb3LafHqUcfdMR4nqZaiWkEQaFNMKgkDoKQ/QXocXFoYbIunoAAAAASUVORK5CYII=" />
+                </ui:WaitImageAppear.Image>
+                <ui:WaitImageAppear.Target>
+                  <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="34619de9-a1ca-4859-812e-ac5e2a420a3f" Selector="&lt;wnd app='chrome.exe' cls='Chrome_WidgetWin_1' title='Yahoo Finance - Stock Market Live, Quotes, Business &amp;amp; Finance Ne*' /&gt;" TimeoutMS="59000">
+                    <ui:Target.WaitForReady>
+                      <InArgument x:TypeArguments="ui:WaitForReady" />
+                    </ui:Target.WaitForReady>
+                  </ui:Target>
+                </ui:WaitImageAppear.Target>
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+              </ui:WaitImageAppear>
+              <ui:OnUiElementAppear ContinueOnError="{x:Null}" FoundElement="{x:Null}" WaitActive="{x:Null}" WaitVisible="{x:Null}" DisplayName="On Element Appear 'Search Symbol_Access_HistoricalDataTab'" sap:VirtualizedContainerService.HintSize="512.666666666667,550.666666666667" sap2010:WorkflowViewState.IdRef="OnUiElementAppear_2" RepeatForever="False">
+                <ui:OnUiElementAppear.Body>
+                  <Sequence DisplayName="Click into Search field and type the symbol in it" sap:VirtualizedContainerService.HintSize="376,374" sap2010:WorkflowViewState.IdRef="Sequence_6">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <ui:Click AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'Search Symbol_Access_HistoricalDataTab'" sap:VirtualizedContainerService.HintSize="334,106.666666666667" sap2010:WorkflowViewState.IdRef="Click_4" KeyModifiers="None" MouseButton="BTN_LEFT">
+                      <ui:Click.CursorPosition>
+                        <ui:CursorPosition Position="Center">
+                          <ui:CursorPosition.OffsetX>
+                            <InArgument x:TypeArguments="x:Int32" />
+                          </ui:CursorPosition.OffsetX>
+                          <ui:CursorPosition.OffsetY>
+                            <InArgument x:TypeArguments="x:Int32" />
+                          </ui:CursorPosition.OffsetY>
+                        </ui:CursorPosition>
+                      </ui:Click.CursorPosition>
+                      <ui:Click.Target>
+                        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="553037a3-53af-4ffa-b5d6-fd3f8ccb67ee" InformativeScreenshot="12779d8e092945aa6e4e46a07b59ff0a" Selector="&lt;webctrl idx='1' tag='INPUT' /&gt;">
+                          <ui:Target.TimeoutMS>
+                            <InArgument x:TypeArguments="x:Int32" />
+                          </ui:Target.TimeoutMS>
+                          <ui:Target.WaitForReady>
+                            <InArgument x:TypeArguments="ui:WaitForReady" />
+                          </ui:Target.WaitForReady>
+                        </ui:Target>
+                      </ui:Click.Target>
+                    </ui:Click>
+                    <ui:TypeInto AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" Activate="True" ClickBeforeTyping="True" DelayBetweenKeys="100" DelayMS="500" DisplayName="Type_Into_search_Symbol_Access_HistoricalDataTab" EmptyField="True" sap:VirtualizedContainerService.HintSize="334,134.666666666667" sap2010:WorkflowViewState.IdRef="TypeInto_1" SendWindowMessages="False" SimulateType="False" Text="[in_StockSymbol]">
+                      <ui:TypeInto.Target>
+                        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="5c9e08af-8ad2-4fc3-9a29-1fea29452827" InformativeScreenshot="a968d4b4717c92e7a8c0a4f83a7ff853" Selector="&lt;webctrl idx='1' tag='INPUT' /&gt;" WaitForReady="COMPLETE">
+                          <ui:Target.TimeoutMS>
+                            <InArgument x:TypeArguments="x:Int32" />
+                          </ui:Target.TimeoutMS>
+                        </ui:Target>
+                      </ui:TypeInto.Target>
+                    </ui:TypeInto>
+                  </Sequence>
+                </ui:OnUiElementAppear.Body>
+                <ui:OnUiElementAppear.Target>
+                  <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="d751f70e-a991-44f0-b33d-9e777f9e8a1f" InformativeScreenshot="be2e42c014c7b731b2bed04e9216c767" Selector="&lt;html app='chrome.exe' title='Yahoo Finance*' /&gt;&lt;webctrl id='yfin-usr-qry' tag='INPUT' aaname='Search' /&gt;" WaitForReady="COMPLETE">
+                    <ui:Target.TimeoutMS>
+                      <InArgument x:TypeArguments="x:Int32" />
+                    </ui:Target.TimeoutMS>
+                  </ui:Target>
+                </ui:OnUiElementAppear.Target>
+              </ui:OnUiElementAppear>
+              <ui:OnUiElementAppear ContinueOnError="{x:Null}" FoundElement="{x:Null}" WaitVisible="{x:Null}" DisplayName="On Element Appear 'Search Button_Access_HistoricalDataTab'" sap:VirtualizedContainerService.HintSize="512.666666666667,574.666666666667" sap2010:WorkflowViewState.IdRef="OnUiElementAppear_3" RepeatForever="False" WaitActive="True">
+                <ui:OnUiElementAppear.Body>
+                  <Sequence sap2010:Annotation.AnnotationText="Click on the search button and wait until the page load completely." DisplayName="Do" sap:VirtualizedContainerService.HintSize="376,398" sap2010:WorkflowViewState.IdRef="Sequence_7">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <ui:Click AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click_Search_Button_Access_HistoricalDataTab" sap:VirtualizedContainerService.HintSize="334,106.666666666667" sap2010:WorkflowViewState.IdRef="Click_1" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="False">
+                      <ui:Click.CursorPosition>
+                        <ui:CursorPosition OffsetX="32" OffsetY="13" Position="TopLeft" />
+                      </ui:Click.CursorPosition>
+                      <ui:Click.Target>
+                        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="226cd669-5db0-4aeb-a3e8-4e9219565596" InformativeScreenshot="1da8f19d86b975821244e6d3891cef37" Selector="&lt;webctrl idx='1' tag='BUTTON' type='submit' /&gt;" WaitForReady="COMPLETE">
+                          <ui:Target.TimeoutMS>
+                            <InArgument x:TypeArguments="x:Int32" />
+                          </ui:Target.TimeoutMS>
+                        </ui:Target>
+                      </ui:Click.Target>
+                    </ui:Click>
+                    <ui:WaitImageAppear FoundElement="{x:Null}" DisplayName="Find Image 'Yahoo logo_Access_HistoricalDataTab'" sap:VirtualizedContainerService.HintSize="334,106.666666666667" sap2010:WorkflowViewState.IdRef="WaitImageAppear_1">
+                      <ui:WaitImageAppear.Image>
+                        <ui:ImageTarget Image="{x:Null}" Accuracy="0.8" InitialScalingFactor="1.5" Profile="Basic" TargetImageBase64="iVBORw0KGgoAAAANSUhEUgAAACIAAAAkCAYAAADsHujfAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAFiUAABYlAUlSJPAAAAKFSURBVFhH7ZVLaBNRFIZ9IqKCojtBXLgRQVwJ4sq1LkRcKLiwvrUFi4JYUfG16EIUtVYUN1YLYlERBEWrqNRSFBQmSdMklTSS2GBjjDGZPJqZI2fucWbu3DGZKQwtOB/8kLnnv2f+zJ17ZxpMEfwgVvQgO6dLkybED2IW4gcxC/l/gpxcHYVksMTp0ek050E8D9J/L0t3MDi/bpjzIJ4GaV06CONVle7AGPkkCz7E0yBP279Td4ObO74KPsSzIPvmBaCQrVF3RjZVhd2zRS9SN0isv0BVxtvbPwTP4zNpqjKGB4ra+N2WFI0YPDg+KsxHIXWDdGwdoSqjXFTg4MKgXt81S9L+pZnObQlomiFBOlamEUa5oMChRSGu/18hdYM0zZRgLF4hB6P7cEqvW4Nmk1Ut3JXN/DjS25HhepuFNHxHulv5R/wtXNJrg69/0yijp409+qF3/JIqigrHVgzp86xCGgY5sCAI8i/+pWvf8AXaVkboilGRFWheHIK9cwPaspj15pb4bpmFNAyCenaR34YfenLw8uoYXTHMN8Pwe+YEuB71hDgKcmRZGGrjxsGEv+U8/5ROrIpAy5IQSM/zoKqq5sGwdv2sQhwFQQ3c/0lOkcCLvObpuyMe5ze2J4ReViGOg5xdGyOnyKWNcc2TDJVoxODJOf4DZyfEcRBUtI/fDchopKzXe69naJSBS3RhPf+BsxPiKsi1LeL50NWc1Ot4rL/qzEAmUYHEZ1k73Mzz/yXEVZDLm+LkZhRzNdg/3zhpJyrEVRDrAYbb2s7nVojjIKfWRMnJUGoqHF0etvW6FeI4yPsufmt+fJiz9U1EiKul8UqIH8QsxA9iFjL1gkwuAH8A/65NKJN+NDcAAAAASUVORK5CYII=" />
+                      </ui:WaitImageAppear.Image>
+                      <ui:WaitImageAppear.Target>
+                        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Selector="{x:Null}" Id="860ecfec-0d5f-4e2d-b479-efd38bf1c624" TimeoutMS="59000">
+                          <ui:Target.WaitForReady>
+                            <InArgument x:TypeArguments="ui:WaitForReady" />
+                          </ui:Target.WaitForReady>
+                        </ui:Target>
+                      </ui:WaitImageAppear.Target>
+                    </ui:WaitImageAppear>
+                  </Sequence>
+                </ui:OnUiElementAppear.Body>
+                <ui:OnUiElementAppear.Target>
+                  <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="b2a1306d-3797-4133-95ff-3c158f500b35" InformativeScreenshot="3b54e7906a9e5684368e9a11a79f338f" Selector="&lt;webctrl idx='179' /&gt;">
+                    <ui:Target.TimeoutMS>
+                      <InArgument x:TypeArguments="x:Int32" />
+                    </ui:Target.TimeoutMS>
+                    <ui:Target.WaitForReady>
+                      <InArgument x:TypeArguments="ui:WaitForReady" />
+                    </ui:Target.WaitForReady>
+                  </ui:Target>
+                </ui:OnUiElementAppear.Target>
+              </ui:OnUiElementAppear>
+              <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="512.666666666667,500" sap2010:WorkflowViewState.IdRef="CommentOut_1">
+                <ui:CommentOut.Body>
+                  <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="376,420.666666666667" sap2010:WorkflowViewState.IdRef="Sequence_8">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <ui:SendHotkey ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" SendWindowMessages="{x:Null}" Activate="True" sap2010:Annotation.AnnotationText="Page down so that Historical data tab is visible." DisplayName="Send_Hotkey_PgDn_Access_HistoricalDataTab" sap:VirtualizedContainerService.HintSize="334,128.666666666667" sap2010:WorkflowViewState.IdRef="SendHotkey_2" Key="pgdn" KeyModifiers="None" SpecialKey="True">
+                      <ui:SendHotkey.Target>
+                        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="54ebcd76-5705-43c6-b310-ba7dd57f1018" InformativeScreenshot="f96ac211fc22f5d498b7db1d2ecc3e1d" Selector="&lt;webctrl idx='1' tag='HTML' /&gt;" WaitForReady="COMPLETE">
+                          <ui:Target.TimeoutMS>
+                            <InArgument x:TypeArguments="x:Int32" />
+                          </ui:Target.TimeoutMS>
+                        </ui:Target>
+                      </ui:SendHotkey.Target>
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                    </ui:SendHotkey>
+                    <ui:SendHotkey ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" SendWindowMessages="{x:Null}" Activate="True" DisplayName="Send_Hotkey_PgDn_Access_HistoricalDataTab" sap:VirtualizedContainerService.HintSize="334,159.333333333333" sap2010:WorkflowViewState.IdRef="SendHotkey_1" Key="pgdn" KeyModifiers="None" SpecialKey="True">
+                      <ui:SendHotkey.Target>
+                        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="404a7d29-972b-47f1-9219-c63ba45a4446" InformativeScreenshot="519cc709641dd07e7c05a34fed37afd5" Selector="&lt;html title='*Yahoo Finance' /&gt;&lt;webctrl tag='HTML' aaname='window.performance &amp;amp;&amp;amp; window.performance.mark &amp;amp;&amp;amp; window.performance.mark(&amp;apos;PageStart&amp;apos;);*' /&gt;" WaitForReady="COMPLETE">
+                          <ui:Target.TimeoutMS>
+                            <InArgument x:TypeArguments="x:Int32" />
+                          </ui:Target.TimeoutMS>
+                        </ui:Target>
+                      </ui:SendHotkey.Target>
+                    </ui:SendHotkey>
+                  </Sequence>
+                </ui:CommentOut.Body>
+              </ui:CommentOut>
+              <ui:Click AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click_HistoricalData_Access_HistoricalDataTab" sap:VirtualizedContainerService.HintSize="512.666666666667,106.666666666667" sap2010:WorkflowViewState.IdRef="Click_3" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="True">
+                <ui:Click.CursorPosition>
+                  <ui:CursorPosition OffsetX="45" OffsetY="17" Position="TopLeft" />
+                </ui:Click.CursorPosition>
+                <ui:Click.Target>
+                  <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="fa357430-d583-4b3c-9ab0-436203c023c2" InformativeScreenshot="93470a4a692eaefae3dbfcde1fd8d6f6" Selector="&lt;html app='chrome.exe' title='* - Yahoo Finance' /&gt;&lt;webctrl aaname='Historical Data' parentid='quote-nav' tag='A' innertext='Historical Data' parentclass='IbBox Fw(500) fin-tab-item H(44px) desktop_Bgc($hoverBgColor):h desktop-lite_Bgc($hoverBgColor):h   ' /&gt;" WaitForReady="COMPLETE">
+                    <ui:Target.TimeoutMS>
+                      <InArgument x:TypeArguments="x:Int32" />
+                    </ui:Target.TimeoutMS>
+                  </ui:Target>
+                </ui:Click.Target>
+              </ui:Click>
+              <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="512.666666666667,437.333333333333" sap2010:WorkflowViewState.IdRef="CommentOut_2">
+                <ui:CommentOut.Body>
+                  <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="476,358" sap2010:WorkflowViewState.IdRef="Sequence_9">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <ui:OnUiElementAppear ContinueOnError="{x:Null}" FoundElement="{x:Null}" WaitActive="{x:Null}" WaitVisible="{x:Null}" DisplayName="On Element Appear HistoricalData_Access_HistoricalDataTab" sap:VirtualizedContainerService.HintSize="434,265.333333333333" sap2010:WorkflowViewState.IdRef="OnUiElementAppear_1" RepeatForever="False">
+                      <ui:OnUiElementAppear.Body>
+                        <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="200,88.6666666666667" sap2010:WorkflowViewState.IdRef="Sequence_5">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                        </Sequence>
+                      </ui:OnUiElementAppear.Body>
+                      <ui:OnUiElementAppear.Target>
+                        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="2095a72d-b7ef-4a7d-9dec-3ed2a7b01c8f" InformativeScreenshot="f9fbe04477808a8936dbb0e763e63eec" Selector="&lt;html app='chrome.exe' title='*Yahoo Finance' /&gt;&lt;webctrl aaname='Historical Data' parentid='quote-nav' tag='SPAN' /&gt;" TimeoutMS="45000" WaitForReady="COMPLETE" />
+                      </ui:OnUiElementAppear.Target>
+                    </ui:OnUiElementAppear>
+                  </Sequence>
+                </ui:CommentOut.Body>
+              </ui:CommentOut>
+            </Sequence>
+          </ActivityAction>
+        </ui:BrowserScope.Body>
+      </ui:BrowserScope>
+    </Sequence>
+  </Sequence>
+</Activity>

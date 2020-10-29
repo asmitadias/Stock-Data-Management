@@ -1,0 +1,512 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="Extract_HistoricalData" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_StartDate" Type="InArgument(x:String)" />
+    <x:Property Name="in_EndDate" Type="InArgument(x:String)" />
+    <x:Property Name="in_Show" Type="InArgument(x:String)" />
+    <x:Property Name="in_Frequency" Type="InArgument(x:String)" />
+    <x:Property Name="in_HistoricalDataFilePath" Type="InArgument(x:String)" />
+    <x:Property Name="in_StockSymbol" Type="InArgument(x:String)" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>720,5549.33333333333</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>Extract_HistoricalData_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <scg:List x:TypeArguments="x:String" Capacity="52">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>System.Activities.DynamicUpdate</x:String>
+      <x:String>UiPath.Platform.ObjectLibrary</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Reflection</x:String>
+      <x:String>System.Runtime.InteropServices</x:String>
+      <x:String>Microsoft.VisualBasic.CompilerServices</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+    </scg:List>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="52">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Platform</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>UiPath.Mail</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.OCR.Activities.Design</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization</AssemblyReference>
+    </scg:List>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence sap2010:Annotation.AnnotationText="Extracts Historical Data from Historical tab of yahoo finance page for different selection criteria and saves them on local drive as csv file. &#xA;" DisplayName="Extract Historical Data from Yahoo Finance webpage" sap:VirtualizedContainerService.HintSize="730,5384.66666666667" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:Boolean" Name="FileExists" />
+      <Variable x:TypeArguments="x:Boolean" Name="SaveAppears" />
+      <Variable x:TypeArguments="x:String" Name="attrib" />
+      <Variable x:TypeArguments="x:String" Name="StockName" />
+      <Variable x:TypeArguments="s:String[]" Name="StockSymbol" />
+      <Variable x:TypeArguments="x:String" Name="result" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <Sequence DisplayName="Yahoo Finanace Activites Container" sap:VirtualizedContainerService.HintSize="688,5220" sap2010:WorkflowViewState.IdRef="Sequence_7">
+      <Sequence.Variables>
+        <Variable x:TypeArguments="x:Boolean" Name="SymbolExists" />
+      </Sequence.Variables>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <ui:BrowserScope Browser="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" UiBrowser="{x:Null}" BrowserType="Chrome" DisplayName="Attach_YahooFinance_Page_ExtractHistoricalData" sap:VirtualizedContainerService.HintSize="646,3638" sap2010:WorkflowViewState.IdRef="BrowserScope_1" InformativeScreenshot="95dced4b433cda366be91e84da127109" Selector="&lt;html title='*Yahoo Finance' /&gt;">
+        <ui:BrowserScope.Body>
+          <ActivityAction x:TypeArguments="x:Object">
+            <ActivityAction.Argument>
+              <DelegateInArgument x:TypeArguments="x:Object" Name="ContextTarget" />
+            </ActivityAction.Argument>
+            <Sequence sap2010:Annotation.AnnotationText="Extracts Historical Data for a given Stock Symbol." DisplayName="Do" sap:VirtualizedContainerService.HintSize="612,3491.33333333333" sap2010:WorkflowViewState.IdRef="Sequence_2">
+              <Sequence.Variables>
+                <Variable x:TypeArguments="x:Boolean" Name="DateRangeExists" />
+              </Sequence.Variables>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <Sequence sap2010:Annotation.AnnotationText="Extracts Symbol from Yahoo Finance Page. It is used to compose the name of downloaed historical data files to save on a local machine." DisplayName="Extract Symbol from Yahoo Finance Page" sap:VirtualizedContainerService.HintSize="570,547.333333333333" sap2010:WorkflowViewState.IdRef="Sequence_8">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <ui:GetValue ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Returns name and symbol of the stock." DisplayName="Get Text 'Stock Name_Extract_HistoricalData'" sap:VirtualizedContainerService.HintSize="334,138.666666666667" sap2010:WorkflowViewState.IdRef="GetValue_1">
+                  <ui:GetValue.Target>
+                    <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="c1386ead-9b3d-4ee2-8da3-532d5d983d4f" InformativeScreenshot="e49a827fc7fc7d4f59e2427db8b716f2" Selector="&lt;html app='chrome.exe' title='*Yahoo Finance' /&gt;&lt;webctrl tag='H1' isleaf='1' parentclass='D(ib) ' /&gt;">
+                      <ui:Target.TimeoutMS>
+                        <InArgument x:TypeArguments="x:Int32" />
+                      </ui:Target.TimeoutMS>
+                      <ui:Target.WaitForReady>
+                        <InArgument x:TypeArguments="ui:WaitForReady" />
+                      </ui:Target.WaitForReady>
+                    </ui:Target>
+                  </ui:GetValue.Target>
+                  <ui:GetValue.Value>
+                    <OutArgument x:TypeArguments="x:String">[StockName]</OutArgument>
+                  </ui:GetValue.Value>
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                </ui:GetValue>
+                <Assign sap2010:Annotation.AnnotationText="Splits the string into stock name and symbol." DisplayName="Assign_ExtractHistoricalData" sap:VirtualizedContainerService.HintSize="334,118" sap2010:WorkflowViewState.IdRef="Assign_1">
+                  <Assign.To>
+                    <OutArgument x:TypeArguments="s:String[]">[StockSymbol]</OutArgument>
+                  </Assign.To>
+                  <Assign.Value>
+                    <InArgument x:TypeArguments="s:String[]">[StockName.Split({"(", ")"}, StringSplitOptions.None)]</InArgument>
+                  </Assign.Value>
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                </Assign>
+                <Assign sap2010:Annotation.AnnotationText="assigns stock symbol to StockName variable." DisplayName="Assign_Symbol_ExtractHistoricalData" sap:VirtualizedContainerService.HintSize="334,118" sap2010:WorkflowViewState.IdRef="Assign_2">
+                  <Assign.To>
+                    <OutArgument x:TypeArguments="x:String">[StockName]</OutArgument>
+                  </Assign.To>
+                  <Assign.Value>
+                    <InArgument x:TypeArguments="x:String">[StockSymbol(1).ToString]</InArgument>
+                  </Assign.Value>
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                </Assign>
+              </Sequence>
+              <If Condition="[StockName = in_StockSymbol]" sap:VirtualizedContainerService.HintSize="570,218" sap2010:WorkflowViewState.IdRef="If_4">
+                <If.Else>
+                  <Throw Exception="[New BusinessRuleException(&quot;Invalid Stock Symbol &quot;)]" sap:VirtualizedContainerService.HintSize="200,22.6666666666667" sap2010:WorkflowViewState.IdRef="Throw_1" />
+                </If.Else>
+              </If>
+              <ui:SendHotkey ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" SendWindowMessages="{x:Null}" Activate="True" sap2010:Annotation.AnnotationText="Page down so that Historical data tab is visible." DisplayName="Send_Hotkey_PgDn_ExtractHistoricalData" sap:VirtualizedContainerService.HintSize="570,128.666666666667" sap2010:WorkflowViewState.IdRef="SendHotkey_1" Key="pgdn" KeyModifiers="None" SpecialKey="True">
+                <ui:SendHotkey.Target>
+                  <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="54ebcd76-5705-43c6-b310-ba7dd57f1018" InformativeScreenshot="f96ac211fc22f5d498b7db1d2ecc3e1d" Selector="&lt;webctrl idx='1' tag='HTML' /&gt;" WaitForReady="COMPLETE">
+                    <ui:Target.TimeoutMS>
+                      <InArgument x:TypeArguments="x:Int32" />
+                    </ui:Target.TimeoutMS>
+                  </ui:Target>
+                </ui:SendHotkey.Target>
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                    <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+              </ui:SendHotkey>
+              <ui:Click AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayMS="{x:Null}" sap2010:Annotation.AnnotationText="" ClickType="CLICK_SINGLE" DisplayName="Click_Dropdown_TimePeriod_ExtractHistoricalData" sap:VirtualizedContainerService.HintSize="570,88.6666666666667" sap2010:WorkflowViewState.IdRef="Click_1" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="True">
+                <ui:Click.CursorPosition>
+                  <ui:CursorPosition OffsetX="89" OffsetY="9" Position="TopLeft" />
+                </ui:Click.CursorPosition>
+                <ui:Click.Target>
+                  <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="20717dc6-fcfa-4adc-b7be-5165d51f1051" InformativeScreenshot="498db52be1e0654cde6a264b5d98fca5" Selector="&lt;html app='chrome.exe' title='*Yahoo Finance' /&gt;&lt;webctrl parentid='Col1-1-HistoricalDataTable-Proxy' tag='svg' idx='1' /&gt;" WaitForReady="COMPLETE">
+                    <ui:Target.TimeoutMS>
+                      <InArgument x:TypeArguments="x:Int32" />
+                    </ui:Target.TimeoutMS>
+                  </ui:Target>
+                </ui:Click.Target>
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                    <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+              </ui:Click>
+              <ui:Click AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" sap2010:Annotation.AnnotationText="Selects time period for which to download historical data." ClickType="CLICK_SINGLE" DisplayName="Click 'DIV  dropdown-menu'" sap:VirtualizedContainerService.HintSize="570,158.666666666667" sap2010:WorkflowViewState.IdRef="Click_24" KeyModifiers="None" MouseButton="BTN_LEFT">
+                <ui:Click.CursorPosition>
+                  <ui:CursorPosition Position="Center">
+                    <ui:CursorPosition.OffsetX>
+                      <InArgument x:TypeArguments="x:Int32" />
+                    </ui:CursorPosition.OffsetX>
+                    <ui:CursorPosition.OffsetY>
+                      <InArgument x:TypeArguments="x:Int32" />
+                    </ui:CursorPosition.OffsetY>
+                  </ui:CursorPosition>
+                </ui:Click.CursorPosition>
+                <ui:Click.Target>
+                  <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="398475a3-15bd-4eef-9348-3cb009762ff8" InformativeScreenshot="ee98f2ad1bf51ba0bcc11344723a5074" Selector="&lt;html app='chrome.exe' title='*Yahoo Finance' /&gt;&lt;webctrl aaname='{{in_StartDate}}' parentid='dropdown-menu' tag='SPAN' /&gt;">
+                    <ui:Target.TimeoutMS>
+                      <InArgument x:TypeArguments="x:Int32" />
+                    </ui:Target.TimeoutMS>
+                    <ui:Target.WaitForReady>
+                      <InArgument x:TypeArguments="ui:WaitForReady" />
+                    </ui:Target.WaitForReady>
+                  </ui:Target>
+                </ui:Click.Target>
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+              </ui:Click>
+              <Sequence DisplayName="Select time period based start date and end date" sap:VirtualizedContainerService.HintSize="570,946" sap2010:WorkflowViewState.IdRef="Sequence_10">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <ui:UiElementExists DisplayName="Element Exists 'INPUT'" Exists="[DateRangeExists]" sap:VirtualizedContainerService.HintSize="528,106.666666666667" sap2010:WorkflowViewState.IdRef="UiElementExists_2">
+                  <ui:UiElementExists.Target>
+                    <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="32a0ee4d-d128-4ed1-90b5-b79a850170f8" InformativeScreenshot="3adbf60d268f6f6735def2ace37a07bf" Selector="&lt;html app='chrome.exe' title='*Yahoo Finance' /&gt;&lt;webctrl name='endDate' tag='INPUT' type='date' /&gt;" TimeoutMS="1000">
+                      <ui:Target.WaitForReady>
+                        <InArgument x:TypeArguments="ui:WaitForReady" />
+                      </ui:Target.WaitForReady>
+                    </ui:Target>
+                  </ui:UiElementExists.Target>
+                </ui:UiElementExists>
+                <If Condition="[DateRangeExists]" sap:VirtualizedContainerService.HintSize="528,706.666666666667" sap2010:WorkflowViewState.IdRef="If_3">
+                  <If.Then>
+                    <Sequence sap:VirtualizedContainerService.HintSize="376,548.666666666667" sap2010:WorkflowViewState.IdRef="Sequence_9">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <ui:TypeInto AlterIfDisabled="{x:Null}" ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" Activate="True" DisplayName="TypeInto_StartDate_ExtractHistoricalData" EmptyField="True" sap:VirtualizedContainerService.HintSize="334,134.666666666667" sap2010:WorkflowViewState.IdRef="TypeInto_1" SendWindowMessages="False" SimulateType="True" Text="[in_StartDate]">
+                        <ui:TypeInto.Target>
+                          <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="eaf83cd8-8084-441e-8fc0-7e2393855ee4" InformativeScreenshot="5e14e388ce2419f33dd49c5bc0a71034" Selector="&lt;html app='chrome.exe' title='*Yahoo Finance' /&gt;&lt;webctrl name='startDate' tag='INPUT' type='date' /&gt;" WaitForReady="COMPLETE">
+                            <ui:Target.TimeoutMS>
+                              <InArgument x:TypeArguments="x:Int32" />
+                            </ui:Target.TimeoutMS>
+                          </ui:Target>
+                        </ui:TypeInto.Target>
+                      </ui:TypeInto>
+                      <ui:TypeInto AlterIfDisabled="{x:Null}" ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" Activate="True" DisplayName="TypeInto_EndDate_ExtractHistoricalData" EmptyField="True" sap:VirtualizedContainerService.HintSize="334,134.666666666667" sap2010:WorkflowViewState.IdRef="TypeInto_2" SendWindowMessages="False" SimulateType="True" Text="[in_EndDate]">
+                        <ui:TypeInto.Target>
+                          <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="1b245fbc-c1b4-4642-a7d9-2ff0a2477d2f" InformativeScreenshot="4f8e63bc47cd31f2ade063d6639494d7" Selector="&lt;html app='chrome.exe' title='*Yahoo Finance' /&gt;&lt;webctrl name='endDate' tag='INPUT' type='date' /&gt;" WaitForReady="COMPLETE">
+                            <ui:Target.TimeoutMS>
+                              <InArgument x:TypeArguments="x:Int32" />
+                            </ui:Target.TimeoutMS>
+                          </ui:Target>
+                        </ui:TypeInto.Target>
+                      </ui:TypeInto>
+                      <ui:Click AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click_Button_Done_ExtractHistoricalData" sap:VirtualizedContainerService.HintSize="334,106.666666666667" sap2010:WorkflowViewState.IdRef="Click_2" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="True">
+                        <ui:Click.CursorPosition>
+                          <ui:CursorPosition OffsetX="34" OffsetY="16" Position="TopLeft" />
+                        </ui:Click.CursorPosition>
+                        <ui:Click.Target>
+                          <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="523e7e29-3d69-4107-a2e4-e2d1b716ab62" InformativeScreenshot="205de5e3fd2525fea97f54e63de01ce9" Selector="&lt;html app='chrome.exe' title='*Yahoo Finance' /&gt;&lt;webctrl aaname='Done' parentid='dropdown-menu' tag='SPAN' /&gt;" WaitForReady="COMPLETE">
+                            <ui:Target.TimeoutMS>
+                              <InArgument x:TypeArguments="x:Int32" />
+                            </ui:Target.TimeoutMS>
+                          </ui:Target>
+                        </ui:Click.Target>
+                      </ui:Click>
+                    </Sequence>
+                  </If.Then>
+                </If>
+              </Sequence>
+              <ui:Click AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click_Dropdown_Show_ExtractHistoricalData" sap:VirtualizedContainerService.HintSize="570,106.666666666667" sap2010:WorkflowViewState.IdRef="Click_3" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="True">
+                <ui:Click.CursorPosition>
+                  <ui:CursorPosition OffsetX="3" OffsetY="7" Position="TopLeft" />
+                </ui:Click.CursorPosition>
+                <ui:Click.Target>
+                  <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="9e1ed7e0-fb6f-446d-bf4c-ece48a51af66" InformativeScreenshot="cba4834a15c9f9bbc572922521c8e622" Selector="&lt;html app='chrome.exe' title='*Yahoo Finance' /&gt;&lt;webctrl aaname='Historical Prices' parentid='Col1-1-HistoricalDataTable-Proxy' tag='SPAN' /&gt;" TimeoutMS="10000" WaitForReady="COMPLETE" />
+                </ui:Click.Target>
+              </ui:Click>
+              <ui:Click AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click_HistoricalPrices_ExtractHistoricalData" sap:VirtualizedContainerService.HintSize="570,106.666666666667" sap2010:WorkflowViewState.IdRef="Click_4" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="True">
+                <ui:Click.CursorPosition>
+                  <ui:CursorPosition OffsetX="33" OffsetY="10" Position="TopLeft" />
+                </ui:Click.CursorPosition>
+                <ui:Click.Target>
+                  <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="abba1185-7c26-4605-bca1-e779a635f790" InformativeScreenshot="ef4a8b84421bee2c52bbdff65a02d605" Selector="&lt;html app='chrome.exe' title='*Yahoo Finance' /&gt;&lt;webctrl parentid='Col1-1-HistoricalDataTable-Proxy' tag='DIV' innertext='{{in_Show}}' parentclass='Pt(5px) Pb(5px) Pos(a) End(0px) Z(10) Bgc($lv3BgColor) Bd Bdc($seperatorColor) Bdrs(2px) Bxsh($boxShadow) W(146px)' /&gt;" TimeoutMS="10000" WaitForReady="COMPLETE" />
+                </ui:Click.Target>
+              </ui:Click>
+              <ui:Click AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click_Dropdown_Daily_ExtractHistoricalData" sap:VirtualizedContainerService.HintSize="570,106.666666666667" sap2010:WorkflowViewState.IdRef="Click_5" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="True">
+                <ui:Click.CursorPosition>
+                  <ui:CursorPosition OffsetX="3" OffsetY="3" Position="TopLeft" />
+                </ui:Click.CursorPosition>
+                <ui:Click.Target>
+                  <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="8f91686f-5a0a-4110-921e-5bf20d9cea97" InformativeScreenshot="3b0271bb0c26fc6f8ff54c5279359cf5" Selector="&lt;html app='chrome.exe' title='*Yahoo Finance' /&gt;&lt;webctrl aaname='Daily' parentid='Col1-1-HistoricalDataTable-Proxy' tag='SPAN' /&gt;" WaitForReady="COMPLETE">
+                    <ui:Target.TimeoutMS>
+                      <InArgument x:TypeArguments="x:Int32" />
+                    </ui:Target.TimeoutMS>
+                  </ui:Target>
+                </ui:Click.Target>
+              </ui:Click>
+              <ui:Click AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'Frequency_ExtractHistoricalData'" sap:VirtualizedContainerService.HintSize="570,106.666666666667" sap2010:WorkflowViewState.IdRef="Click_21" KeyModifiers="None" MouseButton="BTN_LEFT">
+                <ui:Click.CursorPosition>
+                  <ui:CursorPosition Position="Center">
+                    <ui:CursorPosition.OffsetX>
+                      <InArgument x:TypeArguments="x:Int32" />
+                    </ui:CursorPosition.OffsetX>
+                    <ui:CursorPosition.OffsetY>
+                      <InArgument x:TypeArguments="x:Int32" />
+                    </ui:CursorPosition.OffsetY>
+                  </ui:CursorPosition>
+                </ui:Click.CursorPosition>
+                <ui:Click.Target>
+                  <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="aeee0d5c-b9e3-4032-abc3-f5a6f1625415" InformativeScreenshot="f8423bcad9de2cebc95be6d2f4066ec0" Selector="&lt;html app='chrome.exe' title='*Yahoo Finance' /&gt;&lt;webctrl parentid='Col1-1-HistoricalDataTable-Proxy' tag='DIV' innertext='{{in_Frequency}}' parentclass='Pos(a) End(0px) Z(10) Bgc($lv3BgColor) Bd Bdc($seperatorColor) Bdrs(2px) Bxsh($boxShadow)' /&gt;" TimeoutMS="5000">
+                    <ui:Target.WaitForReady>
+                      <InArgument x:TypeArguments="ui:WaitForReady" />
+                    </ui:Target.WaitForReady>
+                  </ui:Target>
+                </ui:Click.Target>
+              </ui:Click>
+              <ui:Click AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click_Button_Apply_ExtractHistoricalData" sap:VirtualizedContainerService.HintSize="570,106.666666666667" sap2010:WorkflowViewState.IdRef="Click_7" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="True">
+                <ui:Click.CursorPosition>
+                  <ui:CursorPosition OffsetX="39" OffsetY="15" Position="TopLeft" />
+                </ui:Click.CursorPosition>
+                <ui:Click.Target>
+                  <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="c83b41f9-bd66-487a-834e-ce272461ffa3" InformativeScreenshot="5363b28f16e14b6c426fee4c8c6278ff" Selector="&lt;html app='chrome.exe' title='*Yahoo Finance' /&gt;&lt;webctrl aaname='Apply' parentid='Col1-1-HistoricalDataTable-Proxy' tag='SPAN' /&gt;" WaitForReady="COMPLETE">
+                    <ui:Target.TimeoutMS>
+                      <InArgument x:TypeArguments="x:Int32" />
+                    </ui:Target.TimeoutMS>
+                  </ui:Target>
+                </ui:Click.Target>
+              </ui:Click>
+              <ui:SendHotkey ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" SendWindowMessages="{x:Null}" Activate="True" DisplayName="Send_Hotkey_PgDn_ExtractHistoricalData" sap:VirtualizedContainerService.HintSize="570,159.333333333333" sap2010:WorkflowViewState.IdRef="SendHotkey_2" Key="pgdn" KeyModifiers="None" SpecialKey="True">
+                <ui:SendHotkey.Target>
+                  <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="8cb97ae1-7b04-4071-8688-bea12ea0b9ff" InformativeScreenshot="f68cc3ba5ceeee70f35bb7deee14bf42" Selector="&lt;html app='chrome.exe' title='*Yahoo Finance' /&gt;&lt;webctrl id='YDC-Col1' tag='DIV' class='YDC-Col1 Bdendc(t) Bdendw(340px) tablet_Bdendw(0)--noRightRail Bdends(s) Mt(17px) Pos(r)' parentclass='Pos(r) Bgc($bg-content) Bgc($lv2BgColor)! Miw(1007px) Maw(1260px) tablet_Miw(600px)--noRightRail Bxz(bb) Bdstartc(t) Bdstartw(20px) Bdendc(t) Bdends(s) Bdendw(20px) Bdstarts(s) Mx(a)' /&gt;" WaitForReady="COMPLETE">
+                    <ui:Target.TimeoutMS>
+                      <InArgument x:TypeArguments="x:Int32" />
+                    </ui:Target.TimeoutMS>
+                  </ui:Target>
+                </ui:SendHotkey.Target>
+              </ui:SendHotkey>
+              <ui:Click AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click_Button_Download_ExtractHistoricalData" sap:VirtualizedContainerService.HintSize="570,106.666666666667" sap2010:WorkflowViewState.IdRef="Click_8" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="True">
+                <ui:Click.CursorPosition>
+                  <ui:CursorPosition OffsetX="36" OffsetY="6" Position="TopLeft" />
+                </ui:Click.CursorPosition>
+                <ui:Click.Target>
+                  <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="38643658-a108-4e36-8002-cf7a32847d0f" InformativeScreenshot="7e50498772fe7272e7b91dac69095a84" Selector="&lt;html app='chrome.exe' title='*Yahoo Finance' /&gt;&lt;webctrl aaname='Download' parentid='Col1-1-HistoricalDataTable-Proxy' tag='SPAN' /&gt;" WaitForReady="COMPLETE">
+                    <ui:Target.TimeoutMS>
+                      <InArgument x:TypeArguments="x:Int32" />
+                    </ui:Target.TimeoutMS>
+                  </ui:Target>
+                </ui:Click.Target>
+              </ui:Click>
+            </Sequence>
+          </ActivityAction>
+        </ui:BrowserScope.Body>
+      </ui:BrowserScope>
+      <ui:Click AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'File Name_SaveAs_HistoricalPrices_ExtractHistoricalData'" sap:VirtualizedContainerService.HintSize="646,106.666666666667" sap2010:WorkflowViewState.IdRef="Click_22" KeyModifiers="None" MouseButton="BTN_LEFT" SimulateClick="True">
+        <ui:Click.CursorPosition>
+          <ui:CursorPosition Position="Center">
+            <ui:CursorPosition.OffsetX>
+              <InArgument x:TypeArguments="x:Int32" />
+            </ui:CursorPosition.OffsetX>
+            <ui:CursorPosition.OffsetY>
+              <InArgument x:TypeArguments="x:Int32" />
+            </ui:CursorPosition.OffsetY>
+          </ui:CursorPosition>
+        </ui:Click.CursorPosition>
+        <ui:Click.Target>
+          <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="d4d4ac52-c883-432c-adcf-fb10d9ed00a9" InformativeScreenshot="2ddc07dc11fc4294319cee118a3f2fea" Selector="&lt;wnd app='chrome.exe' cls='#32770' title='Save As' /&gt;&lt;wnd aaname='Explorer Pane' cls='DirectUIHWND' /&gt;&lt;wnd aaname='File name:' cls='ComboBox' /&gt;&lt;wnd ctrlid='1001' aaname='File name:' /&gt;">
+            <ui:Target.TimeoutMS>
+              <InArgument x:TypeArguments="x:Int32" />
+            </ui:Target.TimeoutMS>
+            <ui:Target.WaitForReady>
+              <InArgument x:TypeArguments="ui:WaitForReady" />
+            </ui:Target.WaitForReady>
+          </ui:Target>
+        </ui:Click.Target>
+      </ui:Click>
+      <ui:TypeInto AlterIfDisabled="{x:Null}" ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" SendWindowMessages="{x:Null}" SimulateType="{x:Null}" Activate="True" DisplayName="Type Into 'File Name_SaveAs_HistoricalPrices_ExtractHistoricalData'" sap:VirtualizedContainerService.HintSize="646,134.666666666667" sap2010:WorkflowViewState.IdRef="TypeInto_4" Text="[in_HistoricalDataFilePath + &quot;\&quot; + StockName]">
+        <ui:TypeInto.Target>
+          <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="ef013fa7-f121-4b9b-bf59-a0fe27ba416c" InformativeScreenshot="0ccdba146e4e9ae8c2951a1400672a6b" Selector="&lt;wnd app='chrome.exe' cls='#32770' title='Save As' /&gt;&lt;wnd aaname='Explorer Pane' cls='DirectUIHWND' /&gt;&lt;wnd aaname='File name:' cls='ComboBox' /&gt;&lt;wnd ctrlid='1001' aaname='File name:' /&gt;">
+            <ui:Target.TimeoutMS>
+              <InArgument x:TypeArguments="x:Int32" />
+            </ui:Target.TimeoutMS>
+            <ui:Target.WaitForReady>
+              <InArgument x:TypeArguments="ui:WaitForReady" />
+            </ui:Target.WaitForReady>
+          </ui:Target>
+        </ui:TypeInto.Target>
+      </ui:TypeInto>
+      <ui:SendHotkey ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" SendWindowMessages="{x:Null}" Activate="True" DisplayName="Send_Hotkey_SaveFile_ExtractHistoricalData" sap:VirtualizedContainerService.HintSize="646,159.333333333333" sap2010:WorkflowViewState.IdRef="SendHotkey_5" Key="enter" KeyModifiers="None" SpecialKey="True">
+        <ui:SendHotkey.Target>
+          <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="0c924aea-6eb6-4baa-83ea-cdb08721765d" InformativeScreenshot="e165f36336f09addc2d80341213d48f9" Selector="&lt;wnd app='*e.exe' cls='#32770' title='Save As' /&gt;&lt;wnd ctrlid='1' title='&amp;amp;Save' aaname='Save' cls='Button' /&gt;">
+            <ui:Target.TimeoutMS>
+              <InArgument x:TypeArguments="x:Int32" />
+            </ui:Target.TimeoutMS>
+            <ui:Target.WaitForReady>
+              <InArgument x:TypeArguments="ui:WaitForReady" />
+            </ui:Target.WaitForReady>
+          </ui:Target>
+        </ui:SendHotkey.Target>
+      </ui:SendHotkey>
+      <ui:UiElementExists DisplayName="Element Exists 'DirectUIHWND'" Exists="[SymbolExists]" sap:VirtualizedContainerService.HintSize="646,106.666666666667" sap2010:WorkflowViewState.IdRef="UiElementExists_1">
+        <ui:UiElementExists.Target>
+          <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="fe096604-1963-40d1-8fe8-2e5f0bb360ba" InformativeScreenshot="f6737d7313e6e3d849a160625db5c602" Selector="&lt;wnd app='chrome.exe' cls='#32770' title='Confirm Save As' /&gt;&lt;wnd aaname='Confirm Save As' cls='DirectUIHWND' /&gt;">
+            <ui:Target.TimeoutMS>
+              <InArgument x:TypeArguments="x:Int32" />
+            </ui:Target.TimeoutMS>
+            <ui:Target.WaitForReady>
+              <InArgument x:TypeArguments="ui:WaitForReady" />
+            </ui:Target.WaitForReady>
+          </ui:Target>
+        </ui:UiElementExists.Target>
+      </ui:UiElementExists>
+      <If Condition="[SymbolExists]" sap:VirtualizedContainerService.HintSize="646,271.333333333333" sap2010:WorkflowViewState.IdRef="If_2">
+        <If.Then>
+          <ui:Click AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'Yes Button_ExtractHistoricalData'" sap:VirtualizedContainerService.HintSize="334,106.666666666667" sap2010:WorkflowViewState.IdRef="Click_23" KeyModifiers="None" MouseButton="BTN_LEFT">
+            <ui:Click.CursorPosition>
+              <ui:CursorPosition Position="Center">
+                <ui:CursorPosition.OffsetX>
+                  <InArgument x:TypeArguments="x:Int32" />
+                </ui:CursorPosition.OffsetX>
+                <ui:CursorPosition.OffsetY>
+                  <InArgument x:TypeArguments="x:Int32" />
+                </ui:CursorPosition.OffsetY>
+              </ui:CursorPosition>
+            </ui:Click.CursorPosition>
+            <ui:Click.Target>
+              <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="8dbe7e40-ddef-4f1a-a731-61269d4aa264" InformativeScreenshot="fe6654e198b92d63b28bc8b92c48a0ad" Selector="&lt;wnd app='chrome.exe' cls='#32770' title='Confirm Save As' /&gt;&lt;wnd aaname='Confirm Save As' cls='DirectUIHWND' /&gt;&lt;wnd aaname='Yes' cls='Button' title='&amp;amp;Yes' /&gt;">
+                <ui:Target.TimeoutMS>
+                  <InArgument x:TypeArguments="x:Int32" />
+                </ui:Target.TimeoutMS>
+                <ui:Target.WaitForReady>
+                  <InArgument x:TypeArguments="ui:WaitForReady" />
+                </ui:Target.WaitForReady>
+              </ui:Target>
+            </ui:Click.Target>
+          </ui:Click>
+        </If.Then>
+        <If.Else>
+          <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="234,66.6666666666667" sap2010:WorkflowViewState.IdRef="WriteLine_2" Text="Can not click Yes button on Extract Symbol!" />
+        </If.Else>
+      </If>
+      <ui:ImageFound DisplayName="Image Exists 'Close Icon_Extract_HistoricalDataTab'" Found="[FileExists]" sap:VirtualizedContainerService.HintSize="646,106.666666666667" sap2010:WorkflowViewState.IdRef="ImageFound_1">
+        <ui:ImageFound.Image>
+          <ui:ImageTarget Image="{x:Null}" Accuracy="0.8" InitialScalingFactor="1.5" Profile="Basic" TargetImageBase64="iVBORw0KGgoAAAANSUhEUgAAABwAAAAZCAYAAAAiwE4nAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAFiUAABYlAUlSJPAAAAD0SURBVEhL7dWxDoIwFIVhn1XjpHFTR+ImsgluoiOO+A74ILriynzNMa2Ypre9NY0Tf9KltXykoI7ozw1g9AYweix4vz8o3WVUVRc1I6ttn5QXByrLM3Vdp2b7WHCbZjSeTN8DmyXhJmfzxWdfXV/VSp8IlKAmhhEE2i7AobbPJskm7EiRBA3BkBNELjQUQ14Q2S6MNzEUQyIQ2dDvIcGQGEQcKsVQFFD6PUXRjlSK/vzS4BjNOQnqBTkMz8y25kOdoAvThaIsKMF0ISgLmj/evlffhjbNTa32seBytRZjOhMN/rcAeixPIkyHfbjBfV5Y9hG9APtm3gub+3uIAAAAAElFTkSuQmCC" />
+        </ui:ImageFound.Image>
+        <ui:ImageFound.Target>
+          <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="ba6adfa9-c46c-4a32-83e6-039114da915d" Selector="&lt;wnd app='chrome.exe' cls='Chrome_WidgetWin_1' title='*Yahoo Finance - Google C*' /&gt;" TimeoutMS="10000">
+            <ui:Target.WaitForReady>
+              <InArgument x:TypeArguments="ui:WaitForReady" />
+            </ui:Target.WaitForReady>
+          </ui:Target>
+        </ui:ImageFound.Target>
+      </ui:ImageFound>
+      <If Condition="[FileExists]" sap:VirtualizedContainerService.HintSize="646,324" sap2010:WorkflowViewState.IdRef="If_1">
+        <If.Then>
+          <ui:ClickImage ContinueOnError="{x:Null}" DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click Image 'Close Icon_Extract_HistoricalDataTab'" sap:VirtualizedContainerService.HintSize="334,159.333333333333" sap2010:WorkflowViewState.IdRef="ClickImage_1" KeyModifiers="None" MouseButton="BTN_LEFT">
+            <ui:ClickImage.CursorPosition>
+              <ui:CursorPosition Position="Center">
+                <ui:CursorPosition.OffsetX>
+                  <InArgument x:TypeArguments="x:Int32" />
+                </ui:CursorPosition.OffsetX>
+                <ui:CursorPosition.OffsetY>
+                  <InArgument x:TypeArguments="x:Int32" />
+                </ui:CursorPosition.OffsetY>
+              </ui:CursorPosition>
+            </ui:ClickImage.CursorPosition>
+            <ui:ClickImage.Image>
+              <ui:ImageTarget Image="{x:Null}" Accuracy="0.8" InitialScalingFactor="1.5" Profile="Basic" TargetImageBase64="iVBORw0KGgoAAAANSUhEUgAAABkAAAAbCAYAAACJISRoAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAFiUAABYlAUlSJPAAAAD1SURBVEhL7dSxDoIwFIVhn1XjpHFTR+ImsgluoiOO+A74ILjiynzNEWoMvW1vg9GFP+lCqR9pkRH9oAHx6j9IWd4p3EWUZZf2iqyqelCcHChNz1TXdXu1SUO2YUTjyfQ1sEASHmw2X7zX5fm1nWmyIhKoC2A4EW6RCeLuDYKNe7uQBJICiEWQDfIBkBFB3I/hDfIBkBVBHPQ5XAByIsgESQDUC5H+j3pvlwTyPnhsUfeaCzIiJgBnwM3ZIBaxASofSEMkgEoKaUj3A+l6TTmoKG7tbJOGLFdrMaDqQqKvMKBjehIBKqzDQ+3jRFvHHvy3GxCPiJ7fInpvHqIgKAAAAABJRU5ErkJggg==" />
+            </ui:ClickImage.Image>
+            <ui:ClickImage.Target>
+              <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="ed4cc627-1ef5-4865-bda2-7118a0a90f27" Selector="&lt;wnd app='chrome.exe' cls='Chrome_WidgetWin_1' title='*Yahoo Finance - Google C*' /&gt;" TimeoutMS="10000">
+                <ui:Target.WaitForReady>
+                  <InArgument x:TypeArguments="ui:WaitForReady" />
+                </ui:Target.WaitForReady>
+              </ui:Target>
+            </ui:ClickImage.Target>
+          </ui:ClickImage>
+        </If.Then>
+        <If.Else>
+          <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="234,66.6666666666667" sap2010:WorkflowViewState.IdRef="WriteLine_1" Text="close not found" />
+        </If.Else>
+      </If>
+    </Sequence>
+  </Sequence>
+</Activity>

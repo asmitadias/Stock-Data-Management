@@ -1,0 +1,140 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="Yahoo_Finanace_Open" this:Yahoo_Finanace_Open.in_Finance_Yahoo_URL="https://finance.yahoo.com/" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_Finance_Yahoo_URL" Type="InArgument(x:String)" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>594,930.666666666667</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>Yahoo_Finanace_Open_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <scg:List x:TypeArguments="x:String" Capacity="25">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>System.Activities.DynamicUpdate</x:String>
+      <x:String>UiPath.Platform.ObjectLibrary</x:String>
+      <x:String>System.Reflection</x:String>
+      <x:String>System.Runtime.InteropServices</x:String>
+    </scg:List>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="18">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Platform</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
+    </scg:List>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="Open Yahoo Finance browser " sap:VirtualizedContainerService.HintSize="604,922" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:OpenBrowser CommunicationMethod="{x:Null}" Hidden="{x:Null}" NewSession="{x:Null}" Private="{x:Null}" UiBrowser="{x:Null}" BrowserType="Chrome" DisplayName="Open Yahoo Finance browser" sap:VirtualizedContainerService.HintSize="562,829.333333333333" sap2010:WorkflowViewState.IdRef="OpenBrowser_1" Url="[in_Finance_Yahoo_URL]">
+      <ui:OpenBrowser.Body>
+        <ActivityAction x:TypeArguments="x:Object">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="x:Object" Name="ContextTarget" />
+          </ActivityAction.Argument>
+          <Sequence sap2010:Annotation.AnnotationText="Maximizes Yahoo Finance window. And cancels restore pages message." DisplayName="Do" sap:VirtualizedContainerService.HintSize="528,722.666666666667" sap2010:WorkflowViewState.IdRef="Sequence_2">
+            <Sequence.Variables>
+              <Variable x:TypeArguments="x:Boolean" Name="RestorePagesExists" />
+            </Sequence.Variables>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ui:MaximizeWindow Window="{x:Null}" DisplayName="Maximize Window" sap:VirtualizedContainerService.HintSize="486,22.6666666666667" sap2010:WorkflowViewState.IdRef="MaximizeWindow_1" />
+            <ui:ImageFound sap2010:Annotation.AnnotationText=" Checks if &quot;Restore Pages&quot; window pops up. If chrome webpage was not closed properly then &quot;Restore Pages&quot; message window pops up when opened again. " DisplayName="Image Exists 'Restore Pages_Extract_HistoricalDataTab'" Found="[RestorePagesExists]" sap:VirtualizedContainerService.HintSize="486,198.666666666667" sap2010:WorkflowViewState.IdRef="ImageFound_1">
+              <ui:ImageFound.Image>
+                <ui:ImageTarget Image="{x:Null}" Accuracy="0.8" InitialScalingFactor="1.5" Profile="Basic" TargetImageBase64="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" />
+              </ui:ImageFound.Image>
+              <ui:ImageFound.Target>
+                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="4c87b881-926e-4597-9a46-5764b093591a" Selector="&lt;wnd app='chrome.exe' cls='Chrome_WidgetWin_1' title='Restore pages?' /&gt;">
+                  <ui:Target.TimeoutMS>
+                    <InArgument x:TypeArguments="x:Int32" />
+                  </ui:Target.TimeoutMS>
+                  <ui:Target.WaitForReady>
+                    <InArgument x:TypeArguments="ui:WaitForReady" />
+                  </ui:Target.WaitForReady>
+                </ui:Target>
+              </ui:ImageFound.Target>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </ui:ImageFound>
+            <If sap2010:Annotation.AnnotationText="closes the pop up window." Condition="[RestorePagesExists]" DisplayName="If Restore Pages window pops up" sap:VirtualizedContainerService.HintSize="486,296.666666666667" sap2010:WorkflowViewState.IdRef="If_1">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <If.Then>
+                <ui:Click AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'Restore Pages_Open_Yahoo_Finance'" sap:VirtualizedContainerService.HintSize="334,106.666666666667" sap2010:WorkflowViewState.IdRef="Click_1" KeyModifiers="None" MouseButton="BTN_LEFT">
+                  <ui:Click.CursorPosition>
+                    <ui:CursorPosition Position="Center">
+                      <ui:CursorPosition.OffsetX>
+                        <InArgument x:TypeArguments="x:Int32" />
+                      </ui:CursorPosition.OffsetX>
+                      <ui:CursorPosition.OffsetY>
+                        <InArgument x:TypeArguments="x:Int32" />
+                      </ui:CursorPosition.OffsetY>
+                    </ui:CursorPosition>
+                  </ui:Click.CursorPosition>
+                  <ui:Click.Target>
+                    <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="e934fc3a-bae7-4ac7-bd0d-7bd17113bb6c" InformativeScreenshot="fccacc71f3024fe5375cb3ce230a9af0" Selector="&lt;wnd app='chrome.exe' cls='Chrome_WidgetWin_1' title='Restore pages?' /&gt;&lt;ctrl name='Restore pages?' role='dialog' /&gt;&lt;ctrl name='Close' role='push button' /&gt;">
+                      <ui:Target.TimeoutMS>
+                        <InArgument x:TypeArguments="x:Int32" />
+                      </ui:Target.TimeoutMS>
+                      <ui:Target.WaitForReady>
+                        <InArgument x:TypeArguments="ui:WaitForReady" />
+                      </ui:Target.WaitForReady>
+                    </ui:Target>
+                  </ui:Click.Target>
+                </ui:Click>
+              </If.Then>
+            </If>
+          </Sequence>
+        </ActivityAction>
+      </ui:OpenBrowser.Body>
+    </ui:OpenBrowser>
+  </Sequence>
+</Activity>
